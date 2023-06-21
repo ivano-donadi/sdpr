@@ -1,0 +1,13 @@
+torch==1.7.1
+numpy==1.21.4
+Pillow==8.4.0
+PyYAML==6.0
+tqdm==4.62.3
+tensorboardX==2.4
+torchvision==0.8.2
+six==1.15.0
+protobuf==3.19.1
+scipy==1.7.2
+matplotlib==3.4.3
+opencv-contrib-python==4.5.5.62   
+pybind11==2.10.4
