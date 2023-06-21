@@ -52,9 +52,6 @@ $ python3 main.py -h
                           Input directory containing the training dataset
     -v VAL_DIR, --val_dir VAL_DIR
                           Input directory containing the validation dataset
-    -l LOST_DIR, --lost_dir LOST_DIR
-                          Input directory containing the lost dataset 
-                          (images with no visible assets)
     -m MODEL_DIR, --model_dir MODEL_DIR
                           Output directory where the trained models will 
                           be stored
@@ -84,8 +81,6 @@ $ python3 generate_database.py -h
                           Input directory containing the training dataset
     -m MODEL_DIR, --model_dir MODEL_DIR
                           Input directory where the trained model is stored
-    -l LOST_DIR, --lost_dir LOST_DIR
-                          Input directory containing the lost dataset
     -o OUTPUT_FN, --output_fn OUTPUT_FN
                           Output file in which to store the generated datbase
     --cfg_file CFG_FILE   Configuration file
@@ -110,8 +105,6 @@ $ python3 eval.py -h
                           if from_database is true this is the input descriptor database file, otherwise it is the folder containing the trainig set
     -t TEST_DATASET_DIR, --test_dataset_dir TEST_DATASET_DIR
                           Input directory containing the test dataset
-    -l LOST_DATASET_DIR, --lost_dataset_dir LOST_DATASET_DIR
-                          Input directory containing the lost dataset (images with no visible assets)
     -m MODEL_DIR, --model_dir MODEL_DIR
                           Input directory where the trained model is stored
     --cfg_file CFG_FILE   Configuration file
