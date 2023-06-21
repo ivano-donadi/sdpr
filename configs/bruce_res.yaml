@@ -1,0 +1,44 @@
+network:
+    descriptor_size: 128
+    n_clusters: null
+    use_vlad: False
+    use_resnet: True
+data:
+    resize_ratio: .5
+
+    sonar_range: 30
+    sonar_width: 130
+    max_sonar_angle: 360
+    min_sonar_similarity: 0.5
+    cfar_algorithm: "SOCA"
+    sonar_yaw_step: 3
+    sonar_rho_step: 1
+
+    augmentation:
+        jittering: 0.5
+        anchor_yaw_min: -60
+        anchor_yaw_max: 60
+    filter: 'bruce'
+    n_positives: 1
+    n_negatives: 1
+    test_width: 256
+    test_height: 200
+    train_width: 1536
+train:
+    batch_size: 2
+    eval_ep: 5
+    save_ep: 5
+    learning_rate: 0.001
+    weight_decay: 0.
+    milestones: [20, 40, 60, 80, 100, 120, 160, 180, 200, 220]
+    gamma: 0.5
+    resume: True
+    show_triplets: False
+    margin: 0.9
+    use_ratio: False
+    use_arcface: False
+eval:
+    knn: 1
+    scan_stride: 1
+    batch_size: 16
+    display: False
