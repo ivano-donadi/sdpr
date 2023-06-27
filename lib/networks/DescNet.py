@@ -47,6 +47,49 @@ def adapt_first_layer(src_model, nChannels):
 
     return new_layer
 
+class Upscaler(nn.Module):
+    def __init__(self, inplanes, outplanes,scale=2):
+        super(Upscaler, self).__init__()
+        self.conv = nn.Sequential(
+            nn.Conv2d(inplanes, outplanes,3,1,1, bias = False),
+            nn.BatchNorm2d(outplanes),
+            nn.LeakyReLU(0.1,True)
+        )
+        if scale:
+            self.upsampler = nn.UpsamplingBilinear2d(scale_factor=scale) # 50,44 
+        else:
+            self.upsampler = nn.Identity()
+    
+    def forward(self,input):
+        res = self.conv(input)
+        return self.upsampler(res)
+
+class SpatialMaxPooling(nn.Module):
+    def __init__(self, precision, imsize, desc_transform):
+        super(SpatialMaxPooling, self).__init__()
+        self.n = 120//precision
+        self.s = imsize[1] - self.n*precision
+        self.precision = precision
+        self.pooler = nn.MaxPool2d((imsize[0], self.s))
+        self.desc_transform = desc_transform
+
+    def forward(self,input):
+        '''
+        input: [b,c,h,w], s+n = w
+        '''
+
+        start_index = self.s//2
+        half_width = self.s//2
+        
+        spatial_descriptors = []
+        for i in range(self.n):
+            curr_start = start_index + i*self.precision
+#            desc = self.pooler(input[:,:,:,curr_start-half_width:curr_start+half_width]) # [b,c,1]
+            desc = self.desc_transform(input[:,:,:,curr_start-half_width:curr_start+half_width]).unsqueeze(2) # [b,c,1]
+#            desc = self.desc_transform(desc).unsqueeze(2)
+            spatial_descriptors.append(desc)
+        return torch.cat(spatial_descriptors, dim=2)
+
 class DescNet(nn.Module):
     def __init__(self, use_vlad = True, use_arcface=False, descriptor_size=1024, n_clusters=16):
         super(DescNet, self).__init__()
@@ -77,6 +120,7 @@ class DescNet(nn.Module):
                 self.fc,
                 self.features
             )
+            self.head = NetVLAD(dim=descriptor_size, num_clusters=n_clusters, circular=False)
         else:
             dummy = np.zeros((1, self.backbone.inplanes*25*32))
             transformer = GaussianRandomProjection(n_components=descriptor_size, random_state = 42)

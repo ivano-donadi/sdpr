@@ -157,7 +157,7 @@ def batched_dataset(instances, net, batch_size:int, cw_360:int, cw_120:int, stri
     for i in tqdm.tqdm(range(0, total_n, batch_size)):
         start = i
         end = min(i+batch_size, total_n)
-        batch = np.array([image_utils.normalize_image(instances[i].image) for i in range(start,end)])
+        batch = np.array([image_utils.normalize_image(instances[i].image, resize=False) for i in range(start,end)])
         batch = torch.from_numpy(batch).cuda()
         desc = net.get_feature_map(batch)
         curr_centers = np.array([(-1 * instances[i].yaw)%360 for i in range(start,end)])

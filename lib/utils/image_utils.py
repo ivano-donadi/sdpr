@@ -57,7 +57,7 @@ def set_detector(name):
     print("Error: CFAR detector {0} not supported, availabe values are SOCA,GOCA".format(name))
     quit()
 
-def apply_cfar(img, bgr=False):
+def apply_cfar(img, bgr=False, resize=True):
   global __cfar_detector__
   global __cfar_alg__
   global __cfar_threshold__
@@ -69,7 +69,8 @@ def apply_cfar(img, bgr=False):
   img = img * 255
   peaks = __cfar_detector__.detect(img, __cfar_alg__)
   peaks &= img > __cfar_threshold__
-  peaks = cv2.resize(peaks, (int(__test_img_width__), int(__test_img_height__)))
+  if resize:
+    peaks = cv2.resize(peaks, (int(__test_img_width__), int(__test_img_height__)))
   if bgr:
       peaks = np.concatenate([peaks[None,:,:].astype(np.float32), peaks[None,:,:].astype(np.float32), peaks[None,:,:].astype(np.float32)], axis = 0)
   else:
@@ -87,7 +88,7 @@ def width_for_degrees(degrees: int, resize_ratio = 1):
     res = deg_1_width * degrees * resize_ratio
     return int(res)
 
-def normalize_image(img):
+def normalize_image(img, resize=True):
   '''
   Normalizes images according to the dataset statistics used when pretraining the network (ImageNet mean and std)
 
@@ -99,7 +100,7 @@ def normalize_image(img):
 
   The normalized image with the same shape as the input
   '''
-  img = apply_cfar(img, bgr=False)
+  img = apply_cfar(img, bgr=False, resize=resize)
   #img = img - dataset_mean
   #img = img / dataset_std
   return img
