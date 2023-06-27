@@ -27,7 +27,7 @@ def parse_args():
                         help='Input directory containing the validation dataset', 
                         required=True)   
     parser.add_argument('-g', '--gt_sim', 
-                        help='Input ground truth similarity file. If it does not exist it will be computed and saved at the given path.', 
+                        help='Input ground truth similarity file. If it does not exist it will be computed and saved at the given path. (.npy extension)', 
                         required=True)     
     parser.add_argument('-m', '--model_dir',  
                         help='Output directory where the trained models will be stored',
@@ -36,7 +36,6 @@ def parse_args():
     parser.add_argument('--epochs',  
                         help='Number of training epochs',
                         required=True)
-
     parser.add_argument("opts", default=None, nargs=argparse.REMAINDER)
     args = parser.parse_args()
     return args

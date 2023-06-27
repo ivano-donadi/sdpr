@@ -18,20 +18,20 @@ import lib.utils.eval_utils as eval_utils
 import lib.utils.sonar_utils as sonar_utils
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='DescNet eval tool')
+    parser = argparse.ArgumentParser(description='DescNet eval tool for grid datasets.')
     parser.add_argument('--from_database', action='store_true',
                         help='If this option is specified the database of descriptor is loaded from file, otherwise it is computed online')
     parser.add_argument('-d', '--database', 
-                        help='if from_database is true this is the input descriptor database file, otherwise it is the folder containing the trainig set', 
+                        help='if from_database is true this is the input descriptor database file, otherwise it is the folder containing the dataset.', 
                         required=True)    
     parser.add_argument('-g', '--gt_sim', 
-                        help='Input ground truth similarity file. If it does not exist it will be computed and saved at the given path.', 
+                        help='Input ground truth similarity file. If it does not exist it will be computed and saved at the given path. (.npy extension)', 
                         required=True)                  
     parser.add_argument('-t', '--test_dataset_dir', 
-                        help='Input directory containing the test dataset', 
-                        required=True)   
+                        help='Input directory containing the test dataset.', 
+                        required=True)
     parser.add_argument('-m', '--model_dir',  
-                        help='Input directory where the trained model is stored',
+                        help='Input directory where the trained model is stored.',
                         required=True)
     parser.add_argument('--cfg_file', help='Configuration file', required=True)
 

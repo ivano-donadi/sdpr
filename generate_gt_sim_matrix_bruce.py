@@ -9,15 +9,15 @@ from lib.evaluators.matrix_evaluator_bruce import Evaluator
 import lib.utils.sonar_utils as sonar_utils
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='DescNet training tool')
+    parser = argparse.ArgumentParser(description='Ground truth similarity matrix generation tool for path datasets.')
     parser.add_argument('-d', '--database', 
-                        help='Input descriptor database', 
+                        help='Input descriptor database computed on the path dataset. Only the position and orientation associated with each descriptor will be used so it can be created with an untrained network.', 
                         required=True)    
     parser.add_argument('-t', '--test_dir', 
-                        help='Input directory containing the test dataset', 
+                        help='Input directory containing the same dataset used for generating the descriptors database.', 
                         required=True)
     parser.add_argument('-o', '--output', 
-                        help='Output similarity matrix file', 
+                        help='Output similarity matrix file (.npy extension)', 
                         required=True)                
     parser.add_argument('--cfg_file', help='Configuration file', required=True)
     parser.add_argument("opts", default=None, nargs=argparse.REMAINDER)

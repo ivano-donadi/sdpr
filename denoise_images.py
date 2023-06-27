@@ -40,10 +40,10 @@ def BM_threshold(data, M, alpha, nlevels, level, mode):
 def parse_args():
     parser = argparse.ArgumentParser(description='Image denoising tool')
     parser.add_argument('-d', '--data_dir', 
-                        help='Input directory containing the dataset', 
+                        help='Input directory containing the dataset images', 
                         required=True)
     parser.add_argument('-s','--save', action='store_true',
-                        help='If this option is specified the images will be overwritten, otherwise the denoised images will just be displayed')
+                        help='If this option is specified the images will be overwritten, otherwise the denoised images will just be displayed. WARNING: you will lose the original images, so back them up first.')
     parser.add_argument('--cfg_file', help='Configuration file', required=True)
     parser.add_argument("opts", default=None, nargs=argparse.REMAINDER)
     args = parser.parse_args()

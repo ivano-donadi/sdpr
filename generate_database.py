@@ -15,15 +15,15 @@ import matplotlib.pyplot as plt
 import lib.utils.sonar_utils as sonar_utils
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='DescNet database generation tool')
+    parser = argparse.ArgumentParser(description='Database generation tool for grid datasets.')
     parser.add_argument('-d', '--dataset_dir', 
                         help='Input directory containing the training dataset', 
                         required=True) 
     parser.add_argument('-m', '--model_dir',  
-                        help='Input directory where the trained model is stored',
+                        help='Input directory where the trained model is stored. If an invalid directory is provided, an untrained model will be generated and used.',
                         required=True)
     parser.add_argument('-o', '--output_fn',  
-                        help='Output file in which to store the generated datbase',
+                        help='Output file in which to store the generated database. (.txt extension)',
                         required=True)
     parser.add_argument('--cfg_file', help='Configuration file', required=True)
 
