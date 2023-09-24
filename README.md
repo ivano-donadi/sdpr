@@ -144,7 +144,7 @@ $ python3 eval.py -h
    -t TEST_DATASET_DIR, --test_dataset_dir TEST_DATASET_DIR
                          Input directory containing the test set (same as the one used to compute the descriptors database)
    -g GT_SIM, --gt_sim GT_SIM
-                         Input ground truth similarity file. If it does not exist it will be computed and saved at the given path. (.npy exteension)
+                         Input ground truth similarity file. If it does not exist it will be computed and saved at the given path. (.npy extension)
    -m MODEL_DIR, --model_dir MODEL_DIR
                          Input directory where the trained model is stored
    --cfg_file CFG_FILE   Configuration file
@@ -170,6 +170,26 @@ $ python3 show_database.py -h
    -d DATABASE, --database DATABASE
                          input descriptor database file
    --cfg_file CFG_FILE   Configuration file
+```
+
+## Citation
+
+If you use this code in an academic context, please cite our paper:
+
+```
+
+@inproceedings{10.1007/978-3-031-44137-0_28,
+   title        = {Improving Generalization of Synthetically Trained
+Sonar Image Descriptors for Underwater Place Recognition},
+   author       = {Donadi, Ivano and Olivastri, Emilio and Fusaro,
+Daniel and Li, Wanmeng and Evangelista, Daniele and Pretto, Alberto},
+   year         = 2023,
+   booktitle    = {International Conference on Computer Vision Systems
+(ICVS)},
+   pages        = {336--349},
+   doi          = {10.1007/978-3-031-44137-0_28}
+}
+
 ```
 
 
